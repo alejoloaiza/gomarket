@@ -1,0 +1,4 @@
+{
+    "ValidCommands": ["ORDER"],
+    "MinWordsCommand": 3
+}
