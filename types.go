@@ -11,6 +11,7 @@ type Order struct {
 	Amount     int64     `json:"amount"`
 	EntryDate  time.Time `json:"entrydate"`
 	ExpiryDate time.Time `json:"expirydate"`
+	Type       string    `json:"type"`
 	Price      int64     `json:"price"`
 }
 
