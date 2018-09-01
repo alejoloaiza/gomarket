@@ -6,7 +6,6 @@ import (
 	"io"
 	"strings"
 
-	"github.com/pkg/errors"
 	"github.com/reactivex/rxgo/iterable"
 	"github.com/reactivex/rxgo/observable"
 	"github.com/reactivex/rxgo/observer"
@@ -21,7 +20,13 @@ func main() {
 
 		// Register a handler function for every next available item.
 		NextHandler: func(item interface{}) {
-			fmt.Printf("Processing: %v\n", item)
+			_, ok := item.(int)
+			if !ok {
+				panic("Error ocurred during convertion")
+			} else {
+				fmt.Printf("Processing: %v\n", item)
+
+			}
 		},
 
 		// Register a handler for any emitted error.
@@ -34,8 +39,7 @@ func main() {
 			fmt.Println("Done!")
 		},
 	}
-
-	it, _ := iterable.New([]interface{}{1, 2, 3, 4, errors.New("bang"), 5})
+	it, _ := iterable.New([]interface{}{1, 2, 3, 4, 4.4, 5})
 	source := observable.From(it)
 	sub := source.Subscribe(watcher)
 
